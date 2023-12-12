@@ -2,7 +2,7 @@ const DbPut = require("../db/dbput.js");
 const DbMod = require("../db/dbMod.js");
 
 
-const SocketController = (socket, variables, data) => {
+const SocketController = (socket,data) => {
   
   const actionTodo = data.actionTodo ? data.actionTodo : "sin action";
   const user = data.user ? data.user : "sin usuario";
