@@ -4,10 +4,8 @@ const app = express();
 const http = require("http").Server(app);
 let conectionCount= 0
 const Soket = require("./socket/socket.js");
-const Variables = require("./models/variables.js");
-const FdbRes = require("./funciones/FdbRes.js");
+const Basededatos  = require("./db/basededatos.js");
 let PORT = process.env.PORT || 3005;
-const VariablesC = Variables();
 
 
 app.use(cors());
@@ -20,11 +18,11 @@ const io = require("socket.io")(http, {
   },
 });
 const recDb = async () => {
-  const respuesta = true /*await FdbRes(variablesAux);*/
+  const respuesta = await BaseDeDatos()
     io.on("connection", (socket) => {
       conectionCount++;
       console.log("User connection");
-      Soket(socket);
+      Soket(socket,respuesta);
     });
 };
 recDb();
