@@ -12,7 +12,7 @@ const DbPut = async (data) => {
                         const uri = "mongodb+srv://moet:moetzapata@cluster0.o52gvk2.mongodb.net/?retryWrites=true&w=majority";
                         const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
                         await client.connect().then(() => console.log('conectado a mongodb dataPut'))
-                        let db = client.db('dominoDb')           
+                        let db = client.db('coleo')           
                         let dbToPut = db.collection(data.coleccion)                         
                         dbToPut.insertOne(data.value)
                         await listDatabases(client)
