@@ -95,6 +95,10 @@ const SocketController = (socket, data) => {
                         actionTodo: "correctRegister",
                         user: nuevoUser
                     })
+                    socket.emit("coleoServer", {
+                                actionTodo: "correctLogin",
+                                user: nuevoUser
+                            });
                 }
                 usuariosEnd()
             }
