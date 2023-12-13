@@ -13,18 +13,10 @@ const DbMod = async (data, extra, usuario) => {
             await client.connect().then(() => console.log('conectado a mongodb dataPut'))
             let db = client.db('coleo')
             let dbUserRes = db.collection(data.coleccion)
-            if (!data.tipo) {
-                let eldd = `${extra}`
-                await dbUserRes.updateOne({ "usuario": usuario },
+            await dbUserRes.updateOne({ "user": data.value.usuario },
                     {
-                        $set: { [eldd]: data.value }
+                        $set: { "data": true }
                     })
-            } else {
-                await dbUserRes.updateOne({ "tipo": "bussines" },
-                    {
-                        $set: { "balance": data.value }
-                    })
-            }
             await listDatabases(client)
             client.close().then(() => console.log('desconectado a mongodb dataPut'))
             return true
