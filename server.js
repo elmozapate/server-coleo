@@ -18,7 +18,7 @@ const io = require("socket.io")(http, {
   },
 });
 const recDb = async () => {
-  const respuesta = await BaseDeDatos()
+  const respuesta = await Basededatos()
     io.on("connection", (socket) => {
       conectionCount++;
       console.log("User connection");
