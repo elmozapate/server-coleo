@@ -33,6 +33,7 @@ const SocketController = (socket, data) => {
                         })
                      }
                 }
+                usuariosReqR()
 
             }
         }
