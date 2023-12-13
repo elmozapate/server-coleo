@@ -11,7 +11,7 @@ const DbMod = async (data, extra, usuario) => {
             const uri = "mongodb+srv://moet:moetzapata@cluster0.o52gvk2.mongodb.net/?retryWrites=true&w=majority";
             const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
             await client.connect().then(() => console.log('conectado a mongodb dataPut'))
-            let db = client.db('dominoDb')
+            let db = client.db('coleo')
             let dbUserRes = db.collection(data.coleccion)
             if (!data.tipo) {
                 let eldd = `${extra}`
