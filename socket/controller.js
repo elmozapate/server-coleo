@@ -92,7 +92,8 @@ const SocketController = (socket, data) => {
                 let usuariosEnd = async () => {
                     await DbPut({ coleccion: 'usuarios', value: nuevoUser })
                     socket.emit("coleoServer", {
-                        actionTodo: "correctRegister"
+                        actionTodo: "correctRegister",
+                        user: nuevoUser
                     })
                 }
                 usuariosEnd()
