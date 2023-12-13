@@ -13,7 +13,7 @@ const DbMod = async (data, extra, usuario) => {
             await client.connect().then(() => console.log('conectado a mongodb dataPut'))
             let db = client.db('coleo')
             let dbUserRes = db.collection(data.coleccion)
-            await dbUserRes.updateOne({ "user": data.value.usuario },
+            await dbUserRes.updateOne({ "usuario": data.value.usuario },
                     {
                         $set: { "validate": true }
                     })
