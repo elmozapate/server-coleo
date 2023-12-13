@@ -9,7 +9,7 @@ const SocketController = (socket,data) => {
   const usuario =
     data.data && data.data.usuario ? data.data.usuario : "sin usuario";
  
-  if (actionTodo === "sendChatPriv") {
+  if (actionTodo === "test") {
     
     socket.emit("coleoServer", {
       actionTodo: "resChat",
