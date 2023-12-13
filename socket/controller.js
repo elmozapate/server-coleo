@@ -18,6 +18,41 @@ const SocketController = (socket, data) => {
             actionTodo: "resChat",
         });
     }
+    if (actionTodo === "comprobarUsuario") {
+
+
+        const mandarUsu = async () => {
+            const resMAndarU = await DbMod({ coleccion: 'usuarios', value: data.user })
+            if (resMAndarU) {
+                let usuariosReqR = async () => {
+                    let usuariosResR = await Basededatos()
+                    if (usuariosResR) {
+                        let usuariosReqRM = async () => {
+
+                            let usuariosResCM = await Basededatos()
+
+                            let isReg = false
+
+                            if (usuariosResCM) {
+                                key.admin ? socket.emit("coleoServer", {
+                                    actionTodo: "adminUpdate",
+                                    users: usuariosResCM
+                                })
+                            
+                                            }
+
+                        }
+                        usuariosReqRM()
+
+
+                    }
+
+                }
+
+            }
+        }
+        mandarUsu()
+    }
     if (actionTodo === "sendLogin") {
         let usuariosReq = async () => {
             let usuariosRes = await Basededatos()
@@ -26,11 +61,11 @@ const SocketController = (socket, data) => {
                 usuariosRes.map((key, i) => {
                     if (key.usuario === data.user.usuario) {
                         if (key.password === data.user.password) {
-                            key.admin?socket.emit("coleoServer", {
+                            key.admin ? socket.emit("coleoServer", {
                                 actionTodo: "admin",
                                 user: key,
-                                users:usuariosRes
-                            }):socket.emit("coleoServer", {
+                                users: usuariosRes
+                            }) : socket.emit("coleoServer", {
                                 actionTodo: "correctLogin",
                                 user: key
                             });
@@ -58,7 +93,7 @@ const SocketController = (socket, data) => {
             ip: 0,
             id: randomId,
             conectado: false,
-            admin:false
+            admin: false
         }
         let usuariosReqR = async () => {
             let usuariosResR = await Basededatos()
@@ -87,7 +122,6 @@ const SocketController = (socket, data) => {
                     let nuevoNombre = darRandom(data.user.usuario)
                     nuevoUser.usuario = nuevoNombre
                 }
-
                 let usuariosEnd = async () => {
                     await DbPut({ coleccion: 'usuarios', value: nuevoUser })
                     socket.emit("coleoServer", {
@@ -95,9 +129,9 @@ const SocketController = (socket, data) => {
                         user: nuevoUser
                     })
                     socket.emit("coleoServer", {
-                                actionTodo: "correctLogin",
-                                user: nuevoUser
-                            });
+                        actionTodo: "correctLogin",
+                        user: nuevoUser
+                    });
                 }
                 usuariosEnd()
             }
