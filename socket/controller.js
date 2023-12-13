@@ -27,26 +27,11 @@ const SocketController = (socket, data) => {
                 let usuariosReqR = async () => {
                     let usuariosResR = await Basededatos()
                     if (usuariosResR) {
-                        let usuariosReqRM = async () => {
-
-                            let usuariosResCM = await Basededatos()
-
-                            let isReg = false
-
-                            if (usuariosResCM) {
-                                key.admin ? socket.emit("coleoServer", {
-                                    actionTodo: "adminUpdate",
-                                    users: usuariosResCM
-                                })
-                            
-                                            }
-
-                        }
-                        usuariosReqRM()
-
-
-                    }
-
+                        socket.emit("coleoServer", {
+                            actionTodo: "adminUpdate",
+                            users: usuariosResR
+                        })
+                     }
                 }
 
             }
