@@ -58,7 +58,8 @@ const SocketController = (socket, data) => {
             acceso: { dias: [] },
             ip: 0,
             id: randomId,
-            conectado: false
+            conectado: false,
+            admin:false
         }
         let usuariosReqR = async () => {
             let usuariosResR = await Basededatos()
