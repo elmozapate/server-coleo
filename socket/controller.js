@@ -55,7 +55,6 @@ const SocketController = (socket, data) => {
         let nuevoUser = {
             ...data.user,
             validate: false,
-            password: randomC,
             ip: 0,
             id: randomId,
             conectado: false,
