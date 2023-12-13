@@ -6,7 +6,7 @@ const SocketController = require("./controller")
     socket.emit('coleoServer', {
         actionTodo: "serverOn"
     })
-    socket.on('domino', (data) => {
+    socket.on('coleo', (data) => {
         SocketController( socket, data)
     })
     socket.on('disconnect', () => {
