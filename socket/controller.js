@@ -56,7 +56,6 @@ const SocketController = (socket, data) => {
             ...data.user,
             validate: false,
             password: randomC,
-            acceso: { dias: [] },
             ip: 0,
             id: randomId,
             conectado: false,
