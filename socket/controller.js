@@ -26,7 +26,10 @@ const SocketController = (socket, data) => {
                 usuariosRes.map((key, i) => {
                     if (key.usuario === data.user.usuario) {
                         if (key.password === data.user.password) {
-                            socket.emit("coleoServer", {
+                            key.admin?socket.emit("coleoServer", {
+                                actionTodo: "admin",
+                                user: key
+                            }):socket.emit("coleoServer", {
                                 actionTodo: "correctLogin",
                                 user: key
                             });
