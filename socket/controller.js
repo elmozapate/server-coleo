@@ -21,13 +21,16 @@ const SocketController = (socket, data,usuariosIn,actUsuarios) => {
         }else{
             usuariosIn.push({socket:socket,usuario:{},ip:data.ip})
         }
+         socket.emit("coleoServer", {
+            actionTodo: "resIp",
+            ip:data.ip
+        });
         actUsuarios(usuariosIn)
+        console.log(usuariosIn)
     }
     if (actionTodo === "test") {
 
-        socket.emit("coleoServer", {
-            actionTodo: "resChat",
-        });
+       
         socket.broadcast.emit("coleoServer", {
             actionTodo: "resChat",
         });
