@@ -19,7 +19,6 @@ const SocketController = (socket, data,usuariosIn,actUsuarios) => {
         if(isO){
             usuariosIn[onP].freeTime = usuariosIn[onP].freeTime - 5
              actUsuarios(usuariosIn)
-        console.log(usuariosIn[onP])
         }
        
        
@@ -46,7 +45,6 @@ const SocketController = (socket, data,usuariosIn,actUsuarios) => {
             ip:data.ip
         });
         actUsuarios(usuariosIn)
-        console.log(usuariosIn[onPos])
     }
        if (actionTodo === "resSend") {
         
@@ -67,7 +65,6 @@ const SocketController = (socket, data,usuariosIn,actUsuarios) => {
             ip:iP
         });
         actUsuarios(usuariosIn)
-        console.log(usuariosIn[onPosr])
         }
         
     }
