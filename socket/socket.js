@@ -16,8 +16,8 @@ const SocketController = require("./controller")
                 onPos=i
             }
         });
-       ( usuariosIn[onPos].usuario && usuariosIn[onPos].usuario.usuario ) && onPos&&usuariosIn.splice(onPos,1);
-       ( usuariosIn[onPos].usuario && usuariosIn[onPos].usuario.usuario ) && onPos&&actUsuarios(usuariosIn);
+       (onPos && usuariosIn[onPos]&& usuariosIn[onPos].usuario && usuariosIn[onPos].usuario.usuario ) && onPos&&usuariosIn.splice(onPos,1);
+       (onPos && usuariosIn[onPos]&& usuariosIn[onPos].usuario && usuariosIn[onPos].usuario.usuario ) && onPos&&actUsuarios(usuariosIn);
     })
 }
 module.exports=Soket
