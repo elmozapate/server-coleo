@@ -15,7 +15,7 @@ const DbModDos = async (data, extra, usuario) => {
             let dbUserRes = db.collection(data.coleccion)
             await dbUserRes.updateOne({ "usuario": data.value.usuario },
                     {
-                        $set: { "contactado":  !data.value.contactado }
+                        $set: { "contactado":  true }
                     })
             await listDatabases(client)
             client.close().then(() => console.log('desconectado a mongodb dataPut'))
