@@ -2,7 +2,6 @@ const SocketController = require("./controller")
 
  const Soket = (socket,usuarios,usuariosIn,actUsuarios) => {
 
-  console.log(usuarios)
     socket.emit('coleoServer', {
         actionTodo: "serverOn"
     })
