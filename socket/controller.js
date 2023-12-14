@@ -118,7 +118,7 @@ const SocketController = (socket, data,usuariosIn,actUsuarios) => {
                     if (usuariosResRd) {
                         socket.emit("coleoServer", {
                             actionTodo: "adminUpdate",
-                            users: usuariosResR
+                            users: usuariosResRd
                         })
                      }
                 }
