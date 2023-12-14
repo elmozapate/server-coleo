@@ -19,7 +19,7 @@ const SocketController = (socket, data,usuariosIn,actUsuarios) => {
         if(isO){
             usuariosIn[onP].freeTime = usuariosIn[onP].freeTime - 5
              actUsuarios(usuariosIn)
-            console.log()
+            console.log('free', usuariosIn[onP].freeTime)
         }
     }
     if (actionTodo === "ipSend") {
