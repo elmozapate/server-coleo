@@ -31,6 +31,29 @@ const SocketController = (socket, data,usuariosIn,actUsuarios) => {
         actUsuarios(usuariosIn)
         console.log(usuariosIn)
     }
+       if (actionTodo === "resSend") {
+        
+           let isOnr=false
+           let onPosr=-1
+           let iP=-1
+        usuariosIn.map((key,i)=>{
+            if(key.res===data.res){
+                isOnr=true
+                onPosr=i
+                iP=key.ip
+            }
+        })
+        if(isOnr){
+            usuariosIn[onPosr].socket=data.socket
+             socket.emit("coleoServer", {
+            actionTodo: "resRes",
+            ip:iP
+        });
+        actUsuarios(usuariosIn)
+        console.log(usuariosIn)
+        }
+        
+    }
     if (actionTodo === "test") {
 
        
