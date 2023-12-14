@@ -9,11 +9,11 @@ const SocketController = (socket, data,usuariosIn,actUsuarios) => {
     const usuario =        data.data && data.data.usuario ? data.data.usuario : "sin usuario";
     if (actionTodo === "ipSend") {
         let isOn=false
-        let omPos=-1
+        let onPos=-1
         usuariosIn.map((key,i)=>{
             if(key.ip===data.ip){
                 isOn=true
-                omPos=i
+                onPos=i
             }
         })
         if(isOn){
