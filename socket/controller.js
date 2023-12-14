@@ -103,22 +103,31 @@ const SocketController = (socket, data,usuariosIn,actUsuarios) => {
         let usuariosReq = async () => {
             let usuariosRes = await Basededatos()
             let isReg = false
+            let doublel=false
             if (usuariosRes) {
                 usuariosRes.map((key, i) => {
                     if (key.usuario === data.user.usuario) {
                         if (key.password === data.user.password) {
                             usuariosIn.map((keyIp,iIp)=>{
                                 if(keyIp.socket.id ===socket.id){
-                                    usuariosIn[iIp].usuario=key
-                                    actUsuarios(usuariosIn)
-
+                                    usuariosIn.map((keyIps,iIps)=>{
+                                        if(keyIps.usuario.usuario ===data.usuario){
+                                            doublel= true
+                                        }
+                                    })
+                                    usuariosIn[iIp].usuario= !doublel?key:usuariosIn[iIp].usuario;
+                                    !doublel &&  actUsuarios(usuariosIn)
+                                    doublel && socket.emit("coleoServer", {
+                                        actionTodo: "correctLoginDouble",
+                                        user: key
+                                    });
                                 }
                             })
                             key.admin ? socket.emit("coleoServer", {
                                 actionTodo: "admin",
                                 user: key,
                                 users: usuariosRes
-                            }) : socket.emit("coleoServer", {
+                            }) : !doublel && socket.emit("coleoServer", {
                                 actionTodo: "correctLogin",
                                 user: key
                             });
