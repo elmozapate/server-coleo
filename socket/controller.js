@@ -30,7 +30,7 @@ const SocketController = (socket, data,usuariosIn,actUsuarios) => {
         let onPos=-1
         let oldU=false
         usuariosIn.map((key,i)=>{
-            if(key.ip===data.ip){
+            if(key.ip&&key.ip===data.ip){
                 isOn=true
                 onPos=i
                 oldU=key
@@ -140,7 +140,7 @@ const SocketController = (socket, data,usuariosIn,actUsuarios) => {
                             usuariosIn.map((keyIp,iIp)=>{
                                 if(keyIp.socket.id ===socket.id){
                                     usuariosIn.map((keyIps,iIps)=>{
-                                        if(keyIps.usuario.usuario ===data.usuario&& keyIps.socket.id !== socket.id){
+                                        if(keyIps.usuario.usuario ===data.usuario&& keyIps.socket.id&& keyIps.socket&& keyIps.socket.id !== socket.id){
                                             doublel= true
                                         }
                                     })
@@ -217,7 +217,7 @@ const SocketController = (socket, data,usuariosIn,actUsuarios) => {
                 let usuariosEnd = async () => {
                     await DbPut({ coleccion: 'usuarios', value: nuevoUser })
                     usuariosIn.map((keyIp,iIp)=>{
-                        if(keyIp.socket.id ===socket.id){
+                        if(keyIp.socket.id&&keyIp.socket&&keyIp.socket.id ===socket.id){
                             usuariosIn[iIp].usuario=nuevoUser
                             actUsuarios(usuariosIn)
                         }
