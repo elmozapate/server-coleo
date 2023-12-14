@@ -6,8 +6,10 @@ let conectionCount= 0
 const Soket = require("./socket/socket.js");
 const Basededatos  = require("./db/basededatos.js");
 let PORT = process.env.PORT || 3005;
-
-
+let usuariosIn=[]
+const actUsuarios=(usuarios)=>{
+  usuariosIn = usuarios
+}
 app.use(cors());
 http.listen(PORT, () => {
   console.log("listening t ", PORT);
@@ -22,7 +24,7 @@ const recDb = async () => {
     io.on("connection", (socket) => {
       conectionCount++;
       console.log("User connection");
-      Soket(socket,respuesta);
+      Soket(socket,respuesta,usuariosIn);
     });
 };
 recDb();
