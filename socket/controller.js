@@ -7,6 +7,23 @@ const SocketController = (socket, data,usuariosIn,actUsuarios) => {
     const actionTodo = data.actionTodo ? data.actionTodo : "sin action";
     const user = data.user ? data.user : "sin usuario";
     const usuario =        data.data && data.data.usuario ? data.data.usuario : "sin usuario";
+     if (actionTodo === "freeTime") {
+        let isO=false
+        let onP=-1
+        usuariosIn.map((key,i)=>{
+            if(key.ip===data.ip){
+                isO=true
+                onP=i
+            }
+        })
+        if(isO){
+            usuariosIn[onP].freeTime = usuariosIn[onP].freeTime - 5
+             actUsuarios(usuariosIn)
+        console.log(usuariosIn[onP])
+        }
+       
+       
+    }
     if (actionTodo === "ipSend") {
         let isOn=false
         let onPos=-1
@@ -19,7 +36,7 @@ const SocketController = (socket, data,usuariosIn,actUsuarios) => {
         if(isOn){
             usuariosIn[onPos].res=data.res
         }else{
-            let newObj={res:0,usuario:{},ip:0}
+            let newObj={res:0,usuario:{},ip:0,freeTime:40}
             newObj.res=data.res
             newObj.ip=data.ip
             usuariosIn.push(newObj)
@@ -29,7 +46,7 @@ const SocketController = (socket, data,usuariosIn,actUsuarios) => {
             ip:data.ip
         });
         actUsuarios(usuariosIn)
-        console.log(usuariosIn)
+        console.log(usuariosIn[onPos])
     }
        if (actionTodo === "resSend") {
         
@@ -50,7 +67,7 @@ const SocketController = (socket, data,usuariosIn,actUsuarios) => {
             ip:iP
         });
         actUsuarios(usuariosIn)
-        console.log(usuariosIn)
+        console.log(usuariosIn[onPosr])
         }
         
     }
