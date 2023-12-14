@@ -19,19 +19,29 @@ const SocketController = (socket, data,usuariosIn,actUsuarios) => {
         if(isO){
             usuariosIn[onP].freeTime = usuariosIn[onP].freeTime - 5
              actUsuarios(usuariosIn)
+            console.log()
         }
     }
     if (actionTodo === "ipSend") {
         let isOn=false
         let onPos=-1
+        let oldU=false
         usuariosIn.map((key,i)=>{
             if(key.ip===data.ip){
                 isOn=true
                 onPos=i
+                oldU=key
             }
         })
         if(isOn){
-            usuariosIn[onPos].res=data.res
+            if(oldU){
+                usuariosIn[onPos]={...oldU,socket:socket}
+                console.log(usuariosIn[onPos])
+                  socket.emit("coleoServer", {
+                      actionTodo: "oldUser",
+                      data:{...oldU,socket:false}
+                  })
+            }
         }else{
             let newObj={res:0,usuario:{},ip:0,freeTime:40}
             newObj.res=data.res
