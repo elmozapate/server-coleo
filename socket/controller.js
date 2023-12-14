@@ -11,7 +11,7 @@ const SocketController = (socket, data,usuariosIn,actUsuarios) => {
         let isO=false
         let onP=-1
         usuariosIn.map((key,i)=>{
-            if(key.ip===data.ip){
+            if(key.socket.id===socket.id){
                 isO=true
                 onP=i
             }
@@ -20,8 +20,6 @@ const SocketController = (socket, data,usuariosIn,actUsuarios) => {
             usuariosIn[onP].freeTime = usuariosIn[onP].freeTime - 5
              actUsuarios(usuariosIn)
         }
-       
-       
     }
     if (actionTodo === "ipSend") {
         let isOn=false
