@@ -24,7 +24,7 @@ const recDb = async () => {
     io.on("connection", (socket) => {
       conectionCount++;
       console.log("User connection");
-      Soket(socket,respuesta,usuariosIn);
+      Soket(socket,respuesta,usuariosIn,actUsuarios);
     });
 };
 recDb();
