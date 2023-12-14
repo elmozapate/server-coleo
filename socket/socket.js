@@ -13,7 +13,7 @@ const SocketController = require("./controller")
         console.log('disconnect', socket.id)
     let onPos=false
      usuariosIn.map((key,i)=>{
-            if(key.socket.id===socket.ip){
+            if(key.socket.id===socket.id){
                 onPos=i
             }
         })
