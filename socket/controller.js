@@ -108,7 +108,7 @@ const SocketController = (socket, data,usuariosIn,actUsuarios) => {
                             usuariosIn.map((keyIp,iIp)=>{
                                 if(keyIp.socket.id ===socket.id){
                                     usuariosIn.map((keyIps,iIps)=>{
-                                        if(keyIps.usuario.usuario ===data.usuario){
+                                        if(keyIps.usuario.usuario ===data.usuario&& keyIps.socket.id !== socket.id){
                                             doublel= true
                                         }
                                     })
