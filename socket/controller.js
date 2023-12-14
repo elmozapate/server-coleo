@@ -2,13 +2,27 @@ const DbPut = require("../db/dbput.js");
 const DbMod = require("../db/dbMod.js");
 const Basededatos = require("../db/basededatos.js");
 
-const SocketController = (socket, data) => {
+const SocketController = (socket, data,usuariosIn,actUsuarios) => {
 
     const actionTodo = data.actionTodo ? data.actionTodo : "sin action";
     const user = data.user ? data.user : "sin usuario";
-    const usuario =
-        data.data && data.data.usuario ? data.data.usuario : "sin usuario";
-
+    const usuario =        data.data && data.data.usuario ? data.data.usuario : "sin usuario";
+    if (actionTodo === "ipSend") {
+        let isOn=false
+        let omPos=-1
+        usuariosIn.map((key,i)=>{
+            if(key.ip===data.ip){
+                isOn=true
+                omPos=i
+            }
+        })
+        if(isOn){
+            usuariosIn[onPos].socket=socket
+        }else{
+            usuariosIn.push({socket:socket,usuario:{},ip:data.ip})
+        }
+        actUsuarios(usuariosIn)
+    }
     if (actionTodo === "test") {
 
         socket.emit("coleoServer", {
@@ -47,6 +61,13 @@ const SocketController = (socket, data) => {
                 usuariosRes.map((key, i) => {
                     if (key.usuario === data.user.usuario) {
                         if (key.password === data.user.password) {
+                            usuariosIn.map((keyIp,iIp)=>{
+                                if(keyIp.socket.id ===socket.id){
+                                    usuariosIn[iIp].usuario=key
+                                    actUsuarios(usuariosIn)
+
+                                }
+                            })
                             key.admin ? socket.emit("coleoServer", {
                                 actionTodo: "admin",
                                 user: key,
@@ -110,6 +131,12 @@ const SocketController = (socket, data) => {
                 }
                 let usuariosEnd = async () => {
                     await DbPut({ coleccion: 'usuarios', value: nuevoUser })
+                    usuariosIn.map((keyIp,iIp)=>{
+                        if(keyIp.socket.id ===socket.id){
+                            usuariosIn[iIp].usuario=nuevoUser
+                            actUsuarios(usuariosIn)
+                        }
+                    })
                     socket.emit("coleoServer", {
                         actionTodo: "correctRegister",
                         user: nuevoUser
