@@ -14,7 +14,7 @@ const SocketController = (socket, data,usuariosIn,actUsuarios) => {
         let isO=false
         let onP=-1
         usuariosIn.map((key,i)=>{
-            if(key.socket.id===socket.id){
+            if(key.socket&&key.socket.id&&key.socket.id===socket.id){
                 isO=true
                 onP=i
             }
