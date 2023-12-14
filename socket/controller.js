@@ -217,7 +217,7 @@ const SocketController = (socket, data,usuariosIn,actUsuarios) => {
                 let usuariosEnd = async () => {
                     await DbPut({ coleccion: 'usuarios', value: nuevoUser })
                     usuariosIn.map((keyIp,iIp)=>{
-                        if(keyIp.socket.id&&keyIp.socket&&keyIp.socket.id ===socket.id){
+                        if(keyIp&&keyIp.socket&&keyIp.socket.id&&keyIp.socket.id ===socket.id){
                             usuariosIn[iIp].usuario=nuevoUser
                             actUsuarios(usuariosIn)
                         }
