@@ -15,9 +15,9 @@ const SocketController = require("./controller")
             if(key.socket.id===socket.id){
                 onPos=i
             }
-        })
-       ( usuariosIn[onPos].usuario &&!usuariosIn[onPos].usuario.usuario) && onPos&&usuariosIn.splice(onPos,1)
-       ( usuariosIn[onPos].usuario &&!usuariosIn[onPos].usuario.usuario) && onPos&&actUsuarios(usuariosIn)
+        });
+       ( usuariosIn[onPos].usuario && !usuariosIn[onPos].usuario.usuario ) && onPos&&usuariosIn.splice(onPos,1);
+       ( usuariosIn[onPos].usuario && !usuariosIn[onPos].usuario.usuario ) && onPos&&actUsuarios(usuariosIn);
     })
 }
 module.exports=Soket
