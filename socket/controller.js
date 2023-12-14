@@ -44,7 +44,7 @@ const SocketController = (socket, data,usuariosIn,actUsuarios) => {
             }
         })
         if(isOnr){
-            usuariosIn[onPosr].socket=data.socket
+            usuariosIn[onPosr].socket=socket
              socket.emit("coleoServer", {
             actionTodo: "resRes",
             ip:iP
