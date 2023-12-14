@@ -17,9 +17,11 @@ const SocketController = (socket, data,usuariosIn,actUsuarios) => {
             }
         })
         if(isOn){
-            usuariosIn[onPos].socket=socket
+            usuariosIn[onPos].res=data.res
         }else{
-            usuariosIn.push({socket:socket,usuario:{},ip:data.ip})
+            let newObj={res:0,usuario:{}}
+            newObj.res=data.res
+            usuariosIn.push(newObj)
         }
          socket.emit("coleoServer", {
             actionTodo: "resIp",
