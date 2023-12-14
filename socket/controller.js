@@ -1,5 +1,6 @@
 const DbPut = require("../db/dbput.js");
 const DbMod = require("../db/dbMod.js");
+const DbModDos = require("../db/dbModDos.js");
 const Basededatos = require("../db/basededatos.js");
 
 const SocketController = (socket, data,usuariosIn,actUsuarios) => {
@@ -106,6 +107,27 @@ const SocketController = (socket, data,usuariosIn,actUsuarios) => {
         }
         mandarUsu()
     }
+        if (actionTodo === "comprobarUsuario") {
+
+
+        const mandarUsud = async () => {
+            const resMAndarUd = await DbModDos({ coleccion: 'usuarios', value: data.user })
+            if (resMAndarUd) {
+                let usuariosReqRd = async () => {
+                    let usuariosResRd = await Basededatos()
+                    if (usuariosResRd) {
+                        socket.emit("coleoServer", {
+                            actionTodo: "adminUpdate",
+                            users: usuariosResR
+                        })
+                     }
+                }
+                usuariosReqRd()
+
+            }
+        }
+        mandarUsud()
+    }
     if (actionTodo === "sendLogin") {
         let usuariosReq = async () => {
             let usuariosRes = await Basededatos()
@@ -159,6 +181,7 @@ const SocketController = (socket, data,usuariosIn,actUsuarios) => {
         let nuevoUser = {
             ...data.user,
             validate: false,
+            contactado: false,
             ip: 0,
             id: randomId,
             conectado: false,
