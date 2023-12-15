@@ -5,7 +5,7 @@ const http = require("http").Server(app);
 let conectionCount= 0
 const Soket = require("./socket/socket.js");
 const Basededatos  = require("./db/basededatos.js");
-const DbWhile  = require("./db/dbWhile.js");
+const DbPut  = require("./db/dbput.js");
 let PORT = process.env.PORT || 3005;
 let usuariosIn=[]
 const actUsuarios=(usuarios)=>{
@@ -22,6 +22,41 @@ const io = require("socket.io")(http, {
 });
 const recDb = async () => {
   const respuesta = await Basededatos()
+  if(respuesta){
+    let manyH = respuesta.length
+    const mandarNuevU=async(veces)=>{
+      if(veces>0){
+         let newUser={
+           validate: false,
+           contactado: false,
+           ip: 0,
+           email:'',
+           id: 0,
+           conectado: false,
+           admin: false,
+           telefono:0,
+           acceso:{
+             dias:[],
+           },
+           dias:{
+             jueves:false,
+             viernes:false,
+             sabado:false,
+             domingo:false
+           },
+           amin:false,
+           conecciones:1,
+           pago:false
+         }
+        const vez=veces - 1
+        const req= await DbPut(respuesta[vez],coleccion:'usuarios'})
+        if(req){
+          mandarNuevU(vez)
+        }
+      }
+    }
+    mandarNuevU(manyH)
+  }
   io.on("connection", (socket) => {
       conectionCount++;
       console.log("User connection");
