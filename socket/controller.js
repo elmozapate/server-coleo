@@ -185,7 +185,14 @@ const SocketController = (socket, data,usuariosIn,actUsuarios) => {
             ip: 0,
             id: randomId,
             conectado: false,
-            admin: false
+            admin: false,
+            dias:{
+            jueves:false,
+            viernes:false,
+            sabado:false,
+            domingo:false
+            },
+            conecciones:1
         }
         let usuariosReqR = async () => {
             let usuariosResR = await Basededatos()
