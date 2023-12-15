@@ -49,7 +49,7 @@ const recDb = async () => {
            pago:false
          }
         const vez=veces - 1
-        const req= await DbPut(respuesta[vez],coleccion:'usuarios'})
+        const req= await DbPut({value:respuesta[vez],coleccion:'usuarios'})
         if(req){
           mandarNuevU(vez)
         }
