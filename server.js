@@ -49,7 +49,7 @@ const recDb = async () => {
            pago:false
          }
         const vez=veces - 1
-        const req= await dbWhile({value:{...newUser,...respuesta[vez]},coleccion:'users'})
+        const req= await DbWhile({value:{...newUser,...respuesta[vez]},coleccion:'users'})
         if(req){
           mandarNuevU(vez)
         }
