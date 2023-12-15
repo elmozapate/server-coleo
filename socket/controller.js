@@ -1,6 +1,8 @@
 const DbPut = require("../db/dbput.js");
 const DbMod = require("../db/dbMod.js");
 const DbModDos = require("../db/dbModDos.js");
+const DbModQr = require("../db/dbModQr.js");
+
 const Basededatos = require("../db/basededatos.js");
 
 const SocketController = (socket, data,usuariosIn,actUsuarios) => {
@@ -175,6 +177,40 @@ const SocketController = (socket, data,usuariosIn,actUsuarios) => {
         }
         usuariosReq()
     }
+     
+    if (actionTodo === "sendQr") {
+        let usuariosReqQr = async () => {
+            let usuariosResQr = await Basededatos()
+            if (usuariosResQr) {
+                let isIN = false
+                let laPos= -1
+                let elUser={}
+                usuariosResQr.map((key, i) => {
+                    if (key.usuario === data.user.usuario) {
+                        isIN = true
+                        laPos=i
+                        elUser=key
+                    }
+                })
+                if(isIN){
+                 const resMAndarQr = await DbModQr({ coleccion: 'usuarios', value: data.user })
+                    if(resMAndarQr){
+                         let usuariosResQrRes = await Basededatos()
+                         if(usuariosResQrRes){
+                             socket.emit('dominoServer',{
+                                 actionTodo:'resQr'
+                             })
+                          socket.broadcast.emit('dominoServer',{
+                                 actionTodo: "adminUpdate",
+                                 users: usuariosResQrRes          
+                             })
+                         }
+                    }
+                }
+            }
+        }
+        usuariosReqQr()
+    }
     if (actionTodo === "sendRegister") {
         let randomC = parseInt(Math.random() * 89000 + 10000)
         let randomId = parseInt(Math.random() * 80000000 + 10000000)
@@ -192,7 +228,8 @@ const SocketController = (socket, data,usuariosIn,actUsuarios) => {
             sabado:false,
             domingo:false
             },
-            conecciones:1
+            conecciones:1,
+            pago:false
         }
         let usuariosReqR = async () => {
             let usuariosResR = await Basededatos()
