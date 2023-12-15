@@ -1,5 +1,5 @@
 const { MongoClient, ServerApiVersion } = require('mongodb');
-const DbModDos = async (data, extra, usuario) => {
+const DbModConneciones = async (data, extra, usuario) => {
     const listDatabases = async (client) => {
         let databasesList = await client.db().admin().listDatabases();
         let db = databasesList.databases
@@ -15,7 +15,7 @@ const DbModDos = async (data, extra, usuario) => {
             let dbUserRes = db.collection(data.coleccion)
             await dbUserRes.updateOne({ "usuario": data.value.usuario },
                     {
-                        $set: { "contactado":  true }
+                        $set: { "conecciones":  data.value.conneciones }
                     })
             await listDatabases(client)
             client.close().then(() => console.log('desconectado a mongodb dataPut'))
@@ -26,4 +26,4 @@ const DbModDos = async (data, extra, usuario) => {
         }
     } else { return false }
 }
-module.exports = DbModDos
+module.exports = DbModConneciones
