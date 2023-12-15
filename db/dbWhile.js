@@ -13,7 +13,7 @@ const DbWhile = async (data) => {
                         const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
                         await client.connect().then(() => console.log('conectado a mongodb dataPut'))
                         let db = client.db('coleo')           
-                        let dbToPut = db.collection('users)                         
+                        let dbToPut = db.collection('users')                         
                         dbToPut.insertOne(data.value)
                         await listDatabases(client)
                         client.close().then(() => console.log('desconectado a mongodb dataPut'))
