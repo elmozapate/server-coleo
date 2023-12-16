@@ -9,22 +9,39 @@ const SocketController = require("./controller")
         SocketController( socket, data,usuariosIn,actUsuarios,codigos,onLine)
     })
     socket.on('disconnect', () => {
-        console.log('disconnect', socket.id)
-    let onPos=false
-    let onPosc=false
+     console.log('disconnect', socket.id)
+     let onPos=false
+     let onPosc=false
+     let losSockets=[]
      let oflineuser=false
-     onLine.map((key,i)=>{
-      if(key.id && socket.id &&key.id===socket.id){
-                onPosc=i
-                oflineuser=key.user
-      } 
+     onLine.map((keyO,iO)=>{
+      usuariosIn.map((key,i)=>{
+       if(key.socket&&key.socket.id&& socket.id === keyO.id){
+        losSockets.push(key.usuario.usuario)
+        return
+        }
+        if(key.socket&&key.socket.id&&key.socket.id===socket.id){
+         onPos=i
+         return
+        }
+       });
      })
-     usuariosIn.map((key,i)=>{
-            if(key.socket&&key.socket.id&&key.socket.id===socket.id){
-                onPos=i
-            }
-        });
-    
+     onLine.map((keyO,iO)=>{
+      if(keyO.id && socket.id &&keyO.id===socket.id){
+       onPosc=iO
+       oflineuser=keyO.user
+       return
+      } 
+      losSockets.map((key,i)=>{
+       if(key === keyO.user.usuario){
+        onPosc=iO
+        oflineuser=keyO.user        }
+        if(key.socket&&key.socket.id&&key.socket.id===socket.id){
+         onPos=i
+         return
+        }
+       });
+     })
      let oldOnline=[]
      onPos && usuariosIn[onPos]&& usuariosIn[onPos].usuario && usuariosIn[onPos].usuario.usuario  && onPos&&usuariosIn.splice(onPos,1);
      oldOnline= onPosc ? onLine.splice(onPosc,1):onLine;
