@@ -5,7 +5,7 @@ const DbModQr = require("../db/dbModQr.js");
 
 const Basededatos = require("../db/basededatos.js");
 
-const SocketController = (socket, data, usuariosIn, actUsuarios, codigos) => {
+const SocketController = (socket, data, usuariosIn, actUsuarios, codigos,onLine) => {
 
   const actionTodo = data.actionTodo ? data.actionTodo : "sin action";
   const user = data.user ? data.user : "sin usuario";
@@ -211,6 +211,19 @@ const SocketController = (socket, data, usuariosIn, actUsuarios, codigos) => {
                   });
                 }
               })
+              if(!key.admin && !double){
+                onLine.push({id:socket.id,usuario:key.usuario})
+                actUsuarios(onLine,false,true)
+                 socket.emit("coleoServer", {
+                   actionTodo: "onlineUsers",
+                   user: onLine
+          
+                 })
+                socket.broadcast.emit("coleoServer", {
+                  actionTodo: "onlineUsers",
+                  user: onLine
+                });
+              }
               key.admin ? socket.emit("coleoServer", {
                 actionTodo: "admin",
                 user: key,
@@ -331,7 +344,7 @@ const SocketController = (socket, data, usuariosIn, actUsuarios, codigos) => {
             actionTodo: "correctRegister",
             user: nuevoUser
           })
-          socket.emit("coleoServer", {
+          socket.broadcast.emit("coleoServer", {
             actionTodo: "correctLogin",
             user: nuevoUser
           });
