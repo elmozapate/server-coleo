@@ -42,7 +42,8 @@ const recDb = async () => {
     })
      socket.emit('coleoServer',{
      actionTodo:'develops',
-      data:respuestaa
+      data:respuestaa,
+       fatad:respuesta
     })
     
     Soket(socket,respuesta,usuariosIn,actUsuarios,codigos,onLine);
