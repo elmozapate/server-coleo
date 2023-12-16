@@ -77,7 +77,7 @@ const SocketController = (socket, data,usuariosIn,actUsuarios,codigos) => {
             let usuariosResRd = await Basededatos()
             if (usuariosResRd) {
                 usuariosResRd.map((keyCode,iCode)=>{
-                     if(keyCode.usuario.usuario===oldUc.usuario){
+                     if(keyCode.usuario===oldUc.usuario){
                          userS=keyCode
                      }
                  })
