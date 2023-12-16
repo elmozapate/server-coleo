@@ -178,6 +178,10 @@ const SocketController = (socket, data,usuariosIn,actUsuarios,codigos) => {
                                 actionTodo: "correctLogin",
                                 user: key
                             });
+                  key.admin &&   socket.emit("coleoServer", {
+                      actionTodo: "codigosRes",
+                      codigos:codigos
+                  });
                         } else {
                             socket.emit("coleoServer", {
                                 actionTodo: "inCorrectLoginData",
