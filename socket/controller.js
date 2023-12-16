@@ -326,6 +326,7 @@ const SocketController = (socket, data, usuariosIn, actUsuarios, codigos,onLine)
       id: randomId,
       conectado: false,
       admin: false,
+      vencido:false,
       dias: {
         jueves: false,
         viernes: false,
