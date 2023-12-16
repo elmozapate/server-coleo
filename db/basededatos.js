@@ -1,5 +1,5 @@
 const { MongoClient, ServerApiVersion } = require('mongodb');
-const Basededatos = async () => {
+const Basededatos = async (usar) => {
 let usuarios =[]
 try {
         const uri = "mongodb+srv://moet:moetzapata@cluster0.o52gvk2.mongodb.net/?retryWrites=true&w=majority";
@@ -8,7 +8,7 @@ try {
         let db = client.db('coleo')
         
         const usuariosF = async () => {
-            let dbUserRes = db.collection('usuarios')
+            let dbUserRes = db.collection(usar?'usar':'usuarios')
             let result = dbUserRes.find({}).project({})
             let usuariosAux = await result.toArray()
             usuarios = usuariosAux
