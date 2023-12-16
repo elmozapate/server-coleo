@@ -5,7 +5,7 @@ const DbModQr = require("../db/dbModQr.js");
 
 const Basededatos = require("../db/basededatos.js");
 
-const SocketController = (socket, data,usuariosIn,actUsuarios) => {
+const SocketController = (socket, data,usuariosIn,actUsuarios,codigos) => {
 
     const actionTodo = data.actionTodo ? data.actionTodo : "sin action";
     const user = data.user ? data.user : "sin usuario";
@@ -58,6 +58,22 @@ const SocketController = (socket, data,usuariosIn,actUsuarios) => {
             ip:data.ip
         });
         actUsuarios(usuariosIn)
+    }
+      if (actionTodo === "sendCode") {
+          codigosA= codigos
+          codigosA.push({
+              usuario:data.user,
+              codigo:parseInt(Math.random()*900000 +100000)
+          })
+          actUsuarios(codigosA,true)
+          socket.emit("coleoServer", {
+           actionTodo: "codigosRes",
+            codigos:codigosA
+        });
+            socket.broadcast.emit("coleoServer", {
+            actionTodo: "codigosRes",
+            codigos:codigosA
+        });
     }
        if (actionTodo === "resSend") {
         
