@@ -11,8 +11,6 @@ const SocketController = (socket, data, usuariosIn, actUsuarios, codigos,onLine)
   const user = data.user ? data.user : "sin usuario";
   const usuario = data.data && data.data.usuario ? data.data.usuario : "sin usuario";
   if (actionTodo === "freeTime") {
-    console.log('free entra')
-
     let isO = false
     let onP = -1
     usuariosIn.map((key, i) => {
@@ -27,6 +25,25 @@ const SocketController = (socket, data, usuariosIn, actUsuarios, codigos,onLine)
       console.log('free', usuariosIn[onP].freeTime)
     }
   }
+  if (actionTodo === "sendQr") {
+    let elUserQr=false
+    let usuariosReqQr = async () => {
+      let usuariosResQr = await Basededatos()
+      if (usuariosResQr) {
+        usuariosResQr.map((key, i) => {
+          if (key.usuario && data.user) {
+            elUserQr = key
+          }
+        })
+        if (elUserQr) {
+          elUserQr.qr=data.qr
+          await DbModQr({ coleccion: 'usuarios', value: elUserQr })
+        }
+      }
+    }
+    usuariosReqQr()
+  }
+  
   if (actionTodo === "ipSend") {
     let isOn = false
     let onPos = -1
