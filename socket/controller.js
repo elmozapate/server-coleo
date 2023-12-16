@@ -25,6 +25,15 @@ const SocketController = (socket, data, usuariosIn, actUsuarios, codigos,onLine)
       console.log('free', usuariosIn[onP].freeTime)
     }
   }
+    if (actionTodo === "actualizabase") {
+      data.array.map( async (key,i)=>{
+        await mandarU(key)
+      })
+      const mandarU=async(datas)=>{
+        let rese=   await DbPut({ coleccion: 'usar', value: datas })
+        return rese
+        }
+    }
   if (actionTodo === "sendQr") {
     let elUserQr=false
     let usuariosReqQr = async () => {
