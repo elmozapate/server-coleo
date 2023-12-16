@@ -10,8 +10,11 @@ let PORT = process.env.PORT || 3005;
 let usuariosIn=[]
 let codigos=[]
 const actUsuarios=(usuarios,codigos)=>{
-  !codigos &&usuariosIn = usuarios
-  codigos &&codigos = usuarios
+  if(!codigos){
+    usuariosIn = usuarios
+  }else{
+    codigos = usuarios
+  }
 }
 
 app.use(cors());
