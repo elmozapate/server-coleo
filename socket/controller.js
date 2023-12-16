@@ -226,7 +226,7 @@ const SocketController = (socket, data, usuariosIn, actUsuarios, codigos,onLine)
                     if (keyIps.usuario.usuario === data.user.usuarioo && keyIps.socket && keyIps.socket.id && keyIps.socket && keyIps.socket.id !== socket.id) {
                      let lasconecciones=0
                       onLine.map((keyOnline,iOnline)=>{
-                        if(keyOnline.user.usuario===data.user.usuario){
+                        if(keyOnline.user&&keyOnline.user.usuario&&keyOnline.user.usuario.usuario===data.user.usuario){
                           lasconecciones++
                         }
                       }) 
