@@ -200,8 +200,8 @@ const SocketController = (socket, data, usuariosIn, actUsuarios, codigos,onLine)
                 if (keyIp.socket && keyIp.socket.id && keyIp.socket.id === socket.id) {
                   usuariosIn.map((keyIps, iIps) => {
                     if (keyIps.usuario.usuario === data.usuario && keyIps.socket && keyIps.socket.id && keyIps.socket && keyIps.socket.id !== socket.id) {
-                      doublel = true
-                    }
+/*                       doublel = true
+ */                    }
                   })
                   usuariosIn[iIp].usuario = !doublel ? key : usuariosIn[iIp].usuario;
                   !doublel && actUsuarios(usuariosIn)
