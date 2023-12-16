@@ -9,14 +9,18 @@ const DbPut  = require("./db/dbput.js");
 let PORT = process.env.PORT || 3005;
 let usuariosIn=[]
 let codigos=[]
-const actUsuarios=(usuarios,codigos)=>{
-  if(!codigos){
-    usuariosIn = usuarios
+let onLine=[]
+const actUsuarios=(value,codigos,onLine)=>{
+  if(onLine){
+    onLine=value
   }else{
-    codigos = usuarios
+    if(!codigos){
+      usuariosIn = value
+    }else{
+      codigos = value
+    }
   }
 }
-
 app.use(cors());
 http.listen(PORT, () => {
   console.log("listening t ", PORT);
@@ -31,7 +35,7 @@ const recDb = async () => {
   io.on("connection", (socket) => {
       conectionCount++;
       console.log("User connection");
-      Soket(socket,respuesta,usuariosIn,actUsuarios,codigos);
+      Soket(socket,respuesta,usuariosIn,actUsuarios,codigos,onLine);
     });
 };
 recDb();
