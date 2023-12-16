@@ -35,7 +35,7 @@ const recDb = async () => {
   io.on("connection", (socket) => {
       conectionCount++;
       console.log("User connection");
-    socket.emit('dominoServer',{
+    socket.emit('coleoServer',{
      actionTodo:'develop',
       data:respuesta
     })
