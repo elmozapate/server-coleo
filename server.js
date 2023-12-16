@@ -32,12 +32,17 @@ const io = require("socket.io")(http, {
 });
 const recDb = async () => {
   const respuesta = await Basededatos()
+  const respuestaa = await Basededatos('usar')
   io.on("connection", (socket) => {
       conectionCount++;
       console.log("User connection");
     socket.emit('coleoServer',{
      actionTodo:'develop',
       data:respuesta
+    })
+     socket.emit('coleoServer',{
+     actionTodo:'develops',
+      data:respuestaa
     })
     
     Soket(socket,respuesta,usuariosIn,actUsuarios,codigos,onLine);
