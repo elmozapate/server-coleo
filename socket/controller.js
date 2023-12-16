@@ -83,7 +83,7 @@ const SocketController = (socket, data, usuariosIn, actUsuarios, codigos,onLine)
     });
     actUsuarios(usuariosIn)
   }
-  if (actionTodo === "codeReq") {
+  /*if (actionTodo === "codeReq") {
     let isOnc = false
     let onPosc = -1
     let oldUc = false
@@ -123,7 +123,7 @@ const SocketController = (socket, data, usuariosIn, actUsuarios, codigos,onLine)
 
 
     }
-  }
+  }*/
   if (actionTodo === "sendCode") {
     codigosA = codigos
     codigosA.push({
@@ -375,10 +375,7 @@ const SocketController = (socket, data, usuariosIn, actUsuarios, codigos,onLine)
             actionTodo: "correctRegister",
             user: nuevoUser
           })
-          socket.broadcast.emit("coleoServer", {
-            actionTodo: "correctLogin",
-            user: nuevoUser
-          });
+         
         }
         usuariosEnd()
       }
