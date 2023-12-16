@@ -43,7 +43,7 @@ const SocketController = (socket, data, usuariosIn, actUsuarios, codigos,onLine)
           }
         })
         if (elUserQr) {
-          elUserQr.qr=data.qr
+          elUserQr.pago=data.qr
           await DbModQr({ coleccion: 'usuarios', value: elUserQr })
         }
       }
