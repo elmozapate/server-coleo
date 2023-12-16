@@ -30,7 +30,7 @@ const SocketController = (socket, data, usuariosIn, actUsuarios, codigos,onLine)
          mandarU(key)
       })
       const mandarU=(datas)=>{
-        await DbPut({ coleccion: 'usar', value: datas })
+         DbPut({ coleccion: 'usar', value: datas })
         }
     }
   if (actionTodo === "sendQr") {
