@@ -27,7 +27,7 @@ const SocketController = (socket, data, usuariosIn, actUsuarios, codigos,onLine)
   }
     if (actionTodo === "actualizabase") {
        const mandarU=async(datas)=>{
-        await DbPut({ coleccion: 'usar', value: datas })
+        await DbPut({ coleccion: 'usuarios', value: datas })
         }
      mandarU(data.user)
      
