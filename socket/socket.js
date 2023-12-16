@@ -28,6 +28,15 @@ const SocketController = require("./controller")
      oldOnline=(onPosc && onLine[onPosc]? onLine.splice(onPos,1):onLine;
      (onPos && usuariosIn[onPos]&& usuariosIn[onPos].usuario && usuariosIn[onPos].usuario.usuario ) && onPos&&actUsuarios(usuariosIn);
      actUsuarios(oldOnline,false,true)
+     socket.emit("coleoServer", {
+                   actionTodo: "onlineUsers",
+                   user: oldOnline
+          
+                 })
+                socket.broadcast.emit("coleoServer", {
+                  actionTodo: "onlineUsers",
+                  user: oldOnline
+                });
     })
 }
 module.exports=Soket
