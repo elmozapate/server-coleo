@@ -25,7 +25,7 @@ const SocketController = require("./controller")
     
      let oldOnline=[]
      onPos && usuariosIn[onPos]&& usuariosIn[onPos].usuario && usuariosIn[onPos].usuario.usuario  && onPos&&usuariosIn.splice(onPos,1);
-     oldOnline=(onPosc && onLine[onPosc]? onLine.splice(onPos,1):onLine;
+     oldOnline= onPosc && onLine[onPosc]? onLine.splice(onPosc,1):onLine;
      (onPos && usuariosIn[onPos]&& usuariosIn[onPos].usuario && usuariosIn[onPos].usuario.usuario ) && onPos&&actUsuarios(usuariosIn);
      actUsuarios(oldOnline,false,true)
      socket.emit("coleoServer", {
