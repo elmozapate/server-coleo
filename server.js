@@ -8,9 +8,12 @@ const Basededatos  = require("./db/basededatos.js");
 const DbPut  = require("./db/dbput.js");
 let PORT = process.env.PORT || 3005;
 let usuariosIn=[]
-const actUsuarios=(usuarios)=>{
-  usuariosIn = usuarios
+let codigos=[]
+const actUsuarios=(usuarios,codigos)=>{
+  !codigos &&usuariosIn = usuarios
+  codigos &&codigos = usuarios
 }
+
 app.use(cors());
 http.listen(PORT, () => {
   console.log("listening t ", PORT);
@@ -25,7 +28,7 @@ const recDb = async () => {
   io.on("connection", (socket) => {
       conectionCount++;
       console.log("User connection");
-      Soket(socket,respuesta,usuariosIn,actUsuarios);
+      Soket(socket,respuesta,usuariosIn,actUsuarios,codigos);
     });
 };
 recDb();
