@@ -1,12 +1,12 @@
 const SocketController = require("./controller")
 
- const Soket = (socket,usuarios,usuariosIn,actUsuarios) => {
+ const Soket = (socket,usuarios,usuariosIn,actUsuarios,codigos) => {
 
     socket.emit('coleoServer', {
         actionTodo: "serverOn"
     })
     socket.on('coleo', (data) => {
-        SocketController( socket, data,usuariosIn,actUsuarios)
+        SocketController( socket, data,usuariosIn,actUsuarios,codigos)
     })
     socket.on('disconnect', () => {
         console.log('disconnect', socket.id)
