@@ -211,7 +211,7 @@ const SocketController = (socket, data, usuariosIn, actUsuarios, codigos,onLine)
                   });
                 }
               })
-              if(!key.admin && !double){
+              if(!key.admin && !doublel){
                 onLine.push({id:socket.id,usuario:key.usuario})
                 actUsuarios(onLine,false,true)
                  socket.emit("coleoServer", {
