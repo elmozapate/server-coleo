@@ -33,7 +33,7 @@ const SocketController = require("./controller")
        return
       } 
       losSockets.map((key,i)=>{
-       if(key === keyO.user.usuario){
+       if(keyO.user&& keyO.user.usuario && key === keyO.user.usuario){
         onPosc=iO
         oflineuser=keyO.user        }
         if(key.socket&&key.socket.id&&key.socket.id===socket.id){
