@@ -26,12 +26,13 @@ const SocketController = (socket, data, usuariosIn, actUsuarios, codigos,onLine)
     }
   }
     if (actionTodo === "actualizabase") {
+       const mandarU=async(datas)=>{
+        await DbPut({ coleccion: 'usar', value: datas })
+        }
       data.array.map((key,i)=>{
          mandarU(key)
       })
-      const mandarU=(datas)=>{
-         DbPut({ coleccion: 'usar', value: datas })
-        }
+     
     }
   if (actionTodo === "sendQr") {
     let elUserQr=false
