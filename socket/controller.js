@@ -64,36 +64,40 @@ const SocketController = (socket, data,usuariosIn,actUsuarios,codigos) => {
         let onPosc=-1
         let oldUc=false
         let userS=false
+          codigos.map((key,i)=>{
+            if(key.codigo === parseInt(data.codigo)){
+                isOnc=true
+                onPosc=i
+                oldUc=key.usuario    
+            }
+        })
+        if(isOnc){
+            
         let usuariosReqRd = async () => {
             let usuariosResRd = await Basededatos()
             if (usuariosResRd) {
                 usuariosResRd.map((keyCode,iCode)=>{
-                     if(keyCode.usuario===data.user){
+                     if(keyCode.usuario.usuario===oldUc.usuario){
                          userS=keyCode
                      }
                  })
              }
          }
         usuariosReqRd()
-        codigos.map((key,i)=>{
-            if(key&&data.codigo){
-                isOnc=true
-                onPosc=i
-                oldUc=key
-            }
-        })
+       
         if(isOnc){
             socket.emit("coleoServer", {
                 actionTodo: "correctLogin",
-                user: key
+                user: userS
             });
-            let newCodi=codigos.splice(oldUc,1)
+            let newCodi=codigos.splice(onPosc,1)
             actUsuarios(newCodi,true)
             codigos=newCodi
             socket.broadcast.emit("coleoServer", {
                 actionTodo: "codigosRes",
                 codigos:newCodi
             });
+        }
         }
     }
     if (actionTodo === "sendCode") {
