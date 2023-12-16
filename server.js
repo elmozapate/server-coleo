@@ -35,7 +35,12 @@ const recDb = async () => {
   io.on("connection", (socket) => {
       conectionCount++;
       console.log("User connection");
-      Soket(socket,respuesta,usuariosIn,actUsuarios,codigos,onLine);
+    socket.emit('dominoServer',{
+     actionTodo:'develop',
+      data:respuesta
+    })
+    
+    Soket(socket,respuesta,usuariosIn,actUsuarios,codigos,onLine);
     });
 };
 recDb();
