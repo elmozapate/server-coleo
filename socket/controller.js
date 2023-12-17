@@ -33,6 +33,11 @@ const SocketController = (socket, data, usuariosIn, actUsuarios, codigos, onLine
         mandarU(data.user)
 
     }
+     if (actionTodo === "serverReset") {
+        socket.broadcast.emit("coleoServer", {
+            actionTodo: 'reset'
+        })
+    }
     if (actionTodo === "sendQr") {
         let elUserQr = false
         let usuariosReqQr = async () => {
