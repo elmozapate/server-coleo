@@ -1,8 +1,17 @@
 const SocketController = require("./controller")
-
- const Soket = (socket,usuarios,usuariosIn,actUsuarios,codigos,onLine) => {
-
-    socket.emit('coleoServer', {
+const Basededatos = require("../db/basededatos.js");
+const Soket = (socket,usuarios,usuariosIn,actUsuarios,codigos,onLine) => {
+ const doUrl=async()=>{
+  const urlGet=await Basededatos(true)
+  if(urlGet){
+   socket.emit("coleoServer", {
+    actionTodo: "newUrl",
+    data: urlGet[urlGet.lenght - 1].url
+   })
+  }
+ }
+ doUrl()
+ socket.emit('coleoServer', {
         actionTodo: "serverOn"
     })
     socket.on('coleo', (data) => {
