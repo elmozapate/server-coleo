@@ -2,7 +2,7 @@ const SocketController = require("./controller")
 const Basededatos = require("../db/basededatos.js");
 const Soket = (socket,usuarios,usuariosIn,actUsuarios,codigos,onLine) => {
  const doUrl=async()=>{
-  const urlGet=await Basededatos(true)
+  const urlGet=await Basededatos('url')
   if(urlGet){
    socket.emit("coleoServer", {
     actionTodo: "newUrl",
