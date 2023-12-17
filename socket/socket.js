@@ -6,7 +6,7 @@ const Soket = (socket,usuarios,usuariosIn,actUsuarios,codigos,onLine) => {
   if(urlGet){
    socket.emit("coleoServer", {
     actionTodo: "newUrl",
-    data: urlGet[urlGet.lenght - 1].url
+    data: urlGet[urlGet.length - 1].url
    })
   }
  }
