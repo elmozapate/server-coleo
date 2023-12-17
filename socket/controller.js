@@ -102,7 +102,10 @@ const SocketController = (socket, data, usuariosIn, actUsuarios, codigos, onLine
             let usuarioRes = await Basededatos()
             let named = true
             usuarioRes && usuarioRes.map((key, i) => {
-                named = false
+                if(key.usuarios===data.user.usuario){
+                                    named = false
+
+                }
             })
             !named ? socket.emit("coleoServer", {
                 actionTodo: "serverRes",
@@ -128,8 +131,8 @@ const SocketController = (socket, data, usuariosIn, actUsuarios, codigos, onLine
 
                 }
             }
-            verUser()
         }
+        verUser()
     }
     if (actionTodo === "ipSend") {
         let isOn = false
