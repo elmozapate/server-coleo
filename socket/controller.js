@@ -38,6 +38,20 @@ const SocketController = (socket, data, usuariosIn, actUsuarios, codigos, onLine
             actionTodo: 'reset'
         })
     }
+    if (actionTodo === "manualReset") {
+        socket.broadcast.emit("coleoServer", {
+            actionTodo: 'reset'
+        })
+    }
+    if (actionTodo === "userReset") {
+        console.log(data)
+    }
+    if (actionTodo === "manualResetUser") {
+        socket.broadcast.emit("coleoServer", {
+            actionTodo: 'resetUsers',
+            user:data.user
+        })
+    }
     if (actionTodo === "sendQr") {
         let elUserQr = false
         let usuariosReqQr = async () => {
