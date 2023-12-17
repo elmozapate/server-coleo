@@ -12,7 +12,7 @@ const DbModUrl = async (data) => {
             const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
             await client.connect().then(() => console.log('conectado a mongodb dataPut'))
             let db = client.db('coleo')
-            let dbUserRes = db.collection(data.coleccion)
+            let dbUserRes = db.collection('VideoUrl')
             await dbUserRes.updateOne({ "identificador": 'url' },
                     {
                         $set: { "url": data }
