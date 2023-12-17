@@ -40,7 +40,7 @@ const SocketController = (socket, data, usuariosIn, actUsuarios, codigos, onLine
     }
     if (actionTodo === "manualReset") {
         socket.broadcast.emit("coleoServer", {
-            actionTodo: 'reset'
+            actionTodo: 'resetReq'
         })
     }
     if (actionTodo === "userReset") {
