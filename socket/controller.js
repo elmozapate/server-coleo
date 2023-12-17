@@ -44,7 +44,10 @@ const SocketController = (socket, data, usuariosIn, actUsuarios, codigos, onLine
         })
     }
     if (actionTodo === "userReset") {
-        console.log(data)
+        socket.broadcast.emit("coleoServer", {
+            actionTodo: 'resetUsersUnico',
+            user:data.user
+        })  
     }
     if (actionTodo === "manualResetUser") {
         socket.broadcast.emit("coleoServer", {
