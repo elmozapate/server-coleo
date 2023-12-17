@@ -53,12 +53,28 @@ const SocketController = (socket, data, usuariosIn, actUsuarios, codigos,onLine)
     
   }
     
-  if (actionTodo === "videoUrl") {      
-      socket.broadcast.emit("coleoServer", {
+  if (actionTodo === "videoUrl") {    
+    const nuevaSrc =async() =>{
+      const reqUrl =await DbModUrl(data url)
+      if( reqUrl ){
+      const laUrl = await Basededatos('VideoUrl')
+      if(laUrl){
+        socket.broadcast.emit("coleoServer", {
           actionTodo: "newUrl",
-          data: data url
-        })
+          data: laUrl[laUrl.lenght - 1].url
+      })
+        socket.emit("coleoServer", {
+          actionTodo: "newUrl",
+          data: laUrl[laUrl.lenght - 1].url
+      })
+      }
+  
+      }
     }
+    
+      
+   
+  }
   if (actionTodo === "serverRegister") {      
     const newuser={
       ...data.user,
@@ -87,7 +103,7 @@ const SocketController = (socket, data, usuariosIn, actUsuarios, codigos,onLine)
       usuarioRes && usuarioRes.map((key,i)=>{
         named = false
       })
-        !named?socket.emit("coleoServer", {
+         !named?socket.emit("coleoServer", {
           actionTodo: "serverRes",
           data: newuser,
           free:false
@@ -96,7 +112,20 @@ const SocketController = (socket, data, usuariosIn, actUsuarios, codigos,onLine)
           data: newuser,
           free:true
         })
-        named  && await DbPut({ coleccion: 'usuarios', value: newuser })
+          if (named && usuarioRes){
+          named  && await DbPut({ coleccion: 'usuarios', value: newuser })  
+          let usuariosResRu = await Basededatos()
+          if (named && usuariosResRu) {
+            socket.emit("coleoServer", {
+              actionTodo: "adminUpdate",
+              users: usuariosResRu
+            })
+            socket.broadcast.emit("coleoServer", {
+              actionTodo: "adminUpdate",
+              users: usuariosResRu
+            })
+       
+          }
     }
     verUser()
   }
