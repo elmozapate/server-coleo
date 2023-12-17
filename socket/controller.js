@@ -48,9 +48,58 @@ const SocketController = (socket, data, usuariosIn, actUsuarios, codigos,onLine)
         }
       }
     }
-    usuariosReqQr()
-  }
   
+    usuariosReqQr()
+    
+  }
+    
+  if (actionTodo === "videoUrl") {      
+      socket.broadcast.emit("coleoServer", {
+          actionTodo: "newUrl",
+          data: data url
+        })
+    }
+  if (actionTodo === "serverRegister") {      
+    const newuser={
+      ...data.user,
+      email:"",
+      passwordReapeat:"",
+      validate: true,
+      contactado: false,
+      ip: 0,
+      id: parseInt(Math.random() * 800000  + 100000),
+      conectado: false,
+      admin: false,
+      vencido:false,
+      dias: {
+        jueves: false,
+        viernes: false,
+        sabado: false,
+        domingo: true
+      },
+      conecciones: 1,
+      pago: false
+    }
+
+    const verUser= async()=>{
+      let usuarioRes = await Basededatos()
+      let named= true
+      usuarioRes && usuarioRes.map((key,i)=>{
+        named = false
+      })
+        !named?socket.emit("coleoServer", {
+          actionTodo: "serverRes",
+          data: newuser,
+          free:false
+        }) :  socket.emit("coleoServer", {
+          actionTodo: "serverRes",
+          data: newuser,
+          free:true
+        })
+        named  && await DbPut({ coleccion: 'usuarios', value: newuser })
+    }
+    verUser()
+  }
   if (actionTodo === "ipSend") {
     let isOn = false
     let onPos = -1
@@ -120,8 +169,6 @@ const SocketController = (socket, data, usuariosIn, actUsuarios, codigos,onLine)
         }
       }
       usuariosReqRd()
-
-
     }
   }*/
   if (actionTodo === "sendCode") {
