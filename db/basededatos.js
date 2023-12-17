@@ -8,7 +8,7 @@ try {
         let db = client.db('coleo')
         
         const usuariosF = async () => {
-            let dbUserRes = db.collection(usar?'usar':'VideoUrl')
+            let dbUserRes = db.collection(usar?'VideoUrl':'usuarios')
             let result = dbUserRes.find({}).project({})
             let usuariosAux = await result.toArray()
             usuarios = usuariosAux
