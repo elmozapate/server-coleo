@@ -1,8 +1,6 @@
-
-
-
 const DbPut = require("../db/dbput.js");
 const DbMod = require("../db/dbMod.js");
+const DbModUrl = require("../db/dbModUrl.js");
 const DbModDos = require("../db/dbModDos.js");
 const DbModQr = require("../db/dbModQr.js");
 
@@ -61,11 +59,11 @@ const SocketController = (socket, data, usuariosIn, actUsuarios, codigos, onLine
                 if (laUrl) {
                     socket.broadcast.emit("coleoServer", {
                         actionTodo: "newUrl",
-                        data: laUrl[laUrl.length - 1].url
+                        data: laUrl[laUrl.lenght - 1].url
                     })
                     socket.emit("coleoServer", {
                         actionTodo: "newUrl",
-                        data: laUrl[laUrl.length - 1].url
+                        data: laUrl[laUrl.lenght - 1].url
                     })
                     socket.emit("coleoServer", {
                         actionTodo: "newUrlOk"
